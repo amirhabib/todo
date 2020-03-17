@@ -1,11 +1,16 @@
 <h1>Phonebook App</h1>
 
-<app-contacts-list [contacts]=contacts ></app-contacts-list>
-
-<div *ngFor="let contact of contacts">
-  {{ contact.name }}
-</div>
+<app-contacts-list
+  [contacts]=contacts
+  (OnEditContact)="editContact( $event )"
+></app-contacts-list>
 
 <hr>
 
-<app-contact-form [contacts]=contacts></app-contact-form>
+<app-contact-form
+  [contact]="editedContact"
+  (newContactEvent)="OnNewContact( $event )"
+  (editContactEvent)="OnEditContact( $event )"
+>
+</app-contact-form>
+

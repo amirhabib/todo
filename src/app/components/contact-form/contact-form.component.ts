@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-contact-form',
@@ -7,21 +7,25 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ContactFormComponent implements OnInit {
 
-  @Input() contacts;
+  @Output() newContactEvent:EventEmitter<any>= new EventEmitter<any>();
+  @Output() editContactEvent:EventEmitter<any> = new EventEmitter<any>();
+  @Input() contact;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  addContact(name, phone) {
-    let newContact = {
-      name: name,
-      phone: phone
+  saveContact() {
+
+    if( !this.contact.id ) {
+
+      this.newContactEvent.emit( this.contact )
+
+    } else {
+
+      this.editContactEvent.emit( this.contact )
     }
 
-    console.log('Adding ' + newContact.name + ' ... ');
-    this.contacts.push( newContact )
-    console.log('Done!');
   }
 }

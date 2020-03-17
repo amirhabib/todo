@@ -20,4 +20,46 @@ export class AppComponent {
       }
     ]
 
+    editedContact = {
+      id: '',
+      name: '',
+      phone: ''
+    }
+
+    OnNewContact( contact ) {
+
+      if(this.contacts.length > 9) {
+        console.error('Cannot add more than 10')
+      } else {
+
+        contact.id = '' + this.contacts.length + 1
+        this.contacts.push( contact )
+        this.resetEditedContact()
+      }
+    }
+
+    OnEditContact( editedContact ) {
+
+      let index = this.contacts.findIndex( contact => contact.id === editedContact.id)
+      this.contacts[index] = editedContact
+      this.resetEditedContact()
+    }
+
+    resetEditedContact() {
+      this.editedContact = {
+        id: '',
+        name: '',
+        phone: ''
+      }
+    }
+
+    editContact( contact ) {
+
+      this.editedContact = {...contact}
+      // this.editedContact = {
+      //   id: contact.id,
+      //   name: contact.name,
+      //   phone: contact.phone
+      // }
+    }
 }

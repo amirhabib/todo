@@ -1,6 +1,8 @@
 <h2>Contact List Component</h2>
 
-<div *ngFor="let contact of contacts">
-  {{ contact.name }}  {{ contact.phone }}
-  <button (click)="doSomething(contact.id)">Do Something</button>
+<div *ngFor="let myContact of contacts">
+  <app-contacts-list-item
+    [contact]="myContact"
+    (OnEditContact)="editContact( $event )"
+  ></app-contacts-list-item>
 </div>

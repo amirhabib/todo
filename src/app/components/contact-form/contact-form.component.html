@@ -2,15 +2,15 @@
   <label for="name">
     Name
   </label>
-  <input type="text" id="name" #name >
+  <input type="text" id="name" [(ngModel)]="contact.name" >
 </div>
 <div>
   <label for="phone">
     Phone
   </label>
-  <input type="text" id="phone" #phone>
+  <input type="text" id="phone" [(ngModel)]="contact.phone">
 </div>
 <div>
-  <button (click)="addContact(name.value, phone.value)">Add</button>
+  <button (click)="saveContact()">Save</button>
 </div>
 
