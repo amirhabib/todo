@@ -1,0 +1,11 @@
+<h1>Phonebook App</h1>
+
+<app-contacts-list [contacts]=contacts ></app-contacts-list>
+
+<div *ngFor="let contact of contacts">
+  {{ contact.name }}
+</div>
+
+<hr>
+
+<app-contact-form [contacts]=contacts></app-contact-form>
