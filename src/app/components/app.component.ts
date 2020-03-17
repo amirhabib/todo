@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ContactsService } from '../services/contacts.service';
 
 @Component({
   selector: 'app-root',
@@ -7,59 +8,58 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-    contacts = [
-      {
-        id: '1',
-        name: 'Alexander',
-        phone: '050'
-      },
-      {
-        id: '2',
-        name: 'Dana',
-        phone: '051'
-      }
-    ]
 
-    editedContact = {
-      id: '',
-      name: '',
-      phone: ''
-    }
+    //  Primitive data
+    msg = 'Hello App Component'
 
-    OnNewContact( contact ) {
+    contacts = [];
 
-      if(this.contacts.length > 9) {
-        console.error('Cannot add more than 10')
-      } else {
+    data = null;
 
-        contact.id = '' + this.contacts.length + 1
-        this.contacts.push( contact )
-        this.resetEditedContact()
-      }
-    }
+    constructor(private contactsService:ContactsService) {
 
-    OnEditContact( editedContact ) {
+    console.log('App Component constructor');
 
-      let index = this.contacts.findIndex( contact => contact.id === editedContact.id)
-      this.contacts[index] = editedContact
-      this.resetEditedContact()
-    }
+    this.msg = contactsService.msg
 
-    resetEditedContact() {
-      this.editedContact = {
-        id: '',
-        name: '',
-        phone: ''
-      }
-    }
+    this.contacts = contactsService.contacts;
 
-    editContact( contact ) {
+    this.data = contactsService.data;
 
-      this.editedContact = {...contact}
-      // this.editedContact = {
-      //   id: contact.id,
-      //   name: contact.name,
-      //   phone: contact.phone
-      // }
-    }
+
+    //  Listen to msg changes
+
+    //  without value
+    // contactsService.OnMessageChanged.subscribe( () => {
+    //   this.msg = contactsService.msg
+    // })
+
+    //  with value
+    contactsService.OnMessageChanged.subscribe( newMessage => {
+      this.msg = newMessage;
+    })
+
+  }
+
+  ngOnInit() {
+    console.log('App Component ngOnInit')
+  }
+
+
+  changeMessage() {
+    this.contactsService.changeMessage()
+  }
+
+  addFredi() {
+    this.contactsService.addFredi()
+  }
+
+  addPink() {
+    this.contactsService.addPink()
+  }
+
+  incCounter() {
+    this.contactsService.incCounter()
+  }
+
 }

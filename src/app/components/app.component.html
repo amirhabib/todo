@@ -1,16 +1,28 @@
 <h1>Phonebook App</h1>
 
-<app-contacts-list
-  [contacts]=contacts
-  (OnEditContact)="editContact( $event )"
-></app-contacts-list>
+<h2>Message of App is: {{ msg }}</h2>
+
+<div>
+  <ul>
+    <li *ngFor="let contact of contacts">{{ contact.name }}</li>
+  </ul>
+</div>
+
 
 <hr>
+<button (click)="changeMessage()">Change Message</button>
+<button (click)="addFredi()">Add Fredi Mercury</button>
+<button (click)="addPink()">Add Pink</button>
+<button (click)="incCounter()">Inc Counter</button>
+<hr>
 
-<app-contact-form
-  [contact]="editedContact"
-  (newContactEvent)="OnNewContact( $event )"
-  (editContactEvent)="OnEditContact( $event )"
->
-</app-contact-form>
+<h3>
+  Colors
+</h3>
+
+<ul>
+  <li *ngFor="let color of data.colors">{{ color }}</li>
+</ul>
+
+<app-hello></app-hello>
 
